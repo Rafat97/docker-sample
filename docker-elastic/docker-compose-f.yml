@@ -1,0 +1,36 @@
+version: "3.3"
+
+volumes:
+  elasticsearch_default_data:
+  kibanadata_default_data:
+
+networks:
+  elasticsearch-networks:
+
+services:
+  elasticsearch-default:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.0.1
+    restart: always
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - elasticsearch_default_data:/usr/share/elasticsearch/data
+    environment:
+      - "discovery.type=single-node"
+      - "xpack.security.enabled=false"
+    networks:
+      - elasticsearch-networks
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.0.1
+    ports:
+      - 5601:5601
+    volumes:
+      - kibanadata_default_data:/usr/share/kibana/data
+    environment:
+      - "ELASTICSEARCH_HOSTS=http://elasticsearch-default:9200"
+      - "ELASTICSEARCH_USERNAME=kibana_system"
+      - "ELASTICSEARCH_PASSWORD=kibana_system_pass"
+    networks:
+      - elasticsearch-networks

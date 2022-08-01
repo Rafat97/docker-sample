@@ -1,0 +1,50 @@
+version: "3.3"
+
+networks:
+  ros-network:
+
+services:
+  ros-master:
+    container_name: ros-master
+    build: 
+        context: .
+        dockerfile: ./ros-master/Dockerfile.ROS_MASTER
+    restart: always
+    tty: true
+    networks:
+      - ros-network
+
+  # ros-talker:
+  #   container_name: ros-talker
+  #   build: 
+  #       context: .
+  #       dockerfile: ./example-ros/Dockerfile.example
+  #   restart: always
+  #   depends_on:
+  #     - ros-master
+  #   environment:
+  #     - "ROS_HOSTNAME=talker"
+  #     - "ROS_MASTER_URI=http://ros-master:11311"
+  #     - "PYTHONUNBUFFERED=1"
+  #   tty: true
+  #   # command: |
+  #   #         ls -al 
+  #   volumes:
+  #     - ./demos/:/app
+  #   networks:
+  #     - ros-network
+
+
+  # ros-listener:
+  #   container_name: ros-listener
+  #   build: 
+  #       context: .
+  #       dockerfile: ./example-ros/Dockerfile.example
+  #   environment:
+  #     - "ROS_HOSTNAME=listener"
+  #     - "ROS_MASTER_URI=http://ros-master:11311"
+  #   restart: always
+  #   command: |
+  #         ros2 run demo_nodes_cpp listener
+  #   networks:
+  #     - ros-network

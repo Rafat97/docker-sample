@@ -1,0 +1,15 @@
+version: "3.3"
+
+
+networks:
+  my-network-ffmpeg:
+
+services:
+  ffmpeg-app:
+    image: jrottenberg/ffmpeg
+    restart: always
+    tty: true
+    # volumes:
+    #   - vol:/data/db
+    networks:
+      - my-network-ffmpeg

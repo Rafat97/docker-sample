@@ -1,0 +1,43 @@
+# Creator -
+# name: Rafat
+# github: Rafat97
+# created at: 5-12-2021
+
+
+version: '3.1'
+
+networks:
+  yourls-docker-network:
+
+volumes:
+  yourls-db-volume:
+  yourls-code-volume:
+
+services:
+
+  yourls:
+    image: yourls
+    restart: always
+    ports:
+      - 9080:80
+    environment:
+      YOURLS_DB_PASS: "yourls_DB_PASS_amarischool_admin"
+      YOURLS_SITE: "http://localhost:9080/"
+      YOURLS_USER: "amarischool"
+      YOURLS_PASS: "amarischool_admin_123"
+    volumes:
+      - "yourls-code-volume:/var/www/html"
+    networks:
+      - "yourls-docker-network"
+
+
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "yourls_DB_PASS_amarischool_admin"
+      MYSQL_DATABASE: "yourls"
+    volumes:
+      - "yourls-db-volume:/var/lib/mysql"
+    networks:
+      - "yourls-docker-network"

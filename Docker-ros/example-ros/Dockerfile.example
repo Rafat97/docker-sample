@@ -1,0 +1,18 @@
+FROM ros:kinetic-ros-core
+LABEL Emdadul Haque "rafathaque1997@gmail.com"
+
+USER root
+
+ENV ROSLISP_PACKAGE_DIRECTORIES=""
+ENV ROS_ETC_DIR="/opt/ros/kinetic/etc/ros"
+ENV ROS_HOSTNAME="talker"
+ENV ROS_MASTER_URI="http://ros-master:11311"
+ENV ROS_PACKAGE_PATH="/opt/ros/kinetic/share"
+ENV ROS_PYTHON_VERSION="2"
+ENV ROS_ROOT="/opt/ros/kinetic/share/ros"
+ENV ROS_VERSION="1"
+
+RUN apt-get update && apt-get install -y 
+RUN  rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app/

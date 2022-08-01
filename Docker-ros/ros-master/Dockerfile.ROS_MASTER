@@ -1,0 +1,16 @@
+FROM osrf/ros:kinetic-desktop-full-xenial
+LABEL Emdadul Haque "rafathaque1997@gmail.com"
+
+RUN apt-get update && apt-get install -y 
+RUN apt-get install -y figlet 
+RUN  rm -rf /var/lib/apt/lists/*
+
+# ENTRYPOINT [ "figlet", "ROS START" ]
+
+RUN figlet ROS START
+# ENTRYPOINT "figlet ROS START" && /bin/bash
+
+# ENTRYPOINT [ "figlet" , "ROS START" ]
+# ENTRYPOINT [ "/ros_entrypoint.sh" ]
+# CMD figlet ROS START
+# CMD [ "stdbuf"  , "-o" , "L", "roscore"]

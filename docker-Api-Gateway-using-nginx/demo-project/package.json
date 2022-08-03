@@ -1,11 +1,11 @@
 {
   "name": "test-express-api",
-  "version": "1.0.0",
+  "version": "v1.0.1",
   "license": "MIT",
   "scripts": {
     "start": "ts-node-dev -r tsconfig-paths/register src/app.ts",
     "start:prod": "ts-node -r tsconfig-paths/register src/app.ts",
-    "start:docker-build": "docker build -t  rafat97/test-application:express-v1.0.0 .",
+    "start:docker-build": "docker build -t  rafat97/test-application:express-v1.0.1 .",
     "test": "jest --coverage --forceExit",
     "test:listener": "ts-node-dev --rs --notify false src/nats-test/Listener.ts",
     "ts": "tsc"

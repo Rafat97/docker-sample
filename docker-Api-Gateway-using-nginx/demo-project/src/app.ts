@@ -7,6 +7,15 @@ const config: IOptions = {
   appPort: parseInt(process.env.APP_PORT || "8000") || 8000,
 };
 
+const sleep = async (time: number) => {
+  return new Promise<void>((resolve, reject) => {
+    setTimeout(() => {
+      console.log("done sleep " + time);
+      resolve();
+    }, time);
+  });
+};
+
 console.log(process.env);
 
 const expressApp = new ExpressApplication(config)
@@ -36,6 +45,16 @@ const expressApp = new ExpressApplication(config)
           method: "GET",
         },
         {
+          path: url + "/sleep/10000",
+          describe: "10s sleep",
+          method: "GET",
+        },
+        {
+          path: url + "/sleep/:time",
+          describe: "dynamic second sleep",
+          method: "GET",
+        },
+        {
           path: url + "/fetch-data",
           describe: "With Async Error",
           method: "GET",
@@ -47,6 +66,13 @@ const expressApp = new ExpressApplication(config)
         },
       ],
       env: process.env,
+    });
+  })
+  .getMethod("/sleep/:time", async (req: any, res: any) => {
+    const time = req.params.time || 10000;
+    await sleep(time);
+    return res.send({
+      message: `Sleep done ${time}`,
     });
   })
   .getMethod("/fetch-data", async (req: any, res: any) => {

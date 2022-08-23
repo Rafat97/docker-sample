@@ -23,8 +23,8 @@ services:
     environment:
       YOURLS_DB_PASS: "yourls_DB_PASS_amarischool_admin"
       YOURLS_SITE: "http://localhost:9080/"
-      YOURLS_USER: "amarischool"
-      YOURLS_PASS: "amarischool_admin_123"
+      YOURLS_USER: "test"
+      YOURLS_PASS: "test_123"
     volumes:
       - "yourls-code-volume:/var/www/html"
     networks:

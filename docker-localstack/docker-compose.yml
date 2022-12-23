@@ -1,0 +1,28 @@
+# Creator -
+# name: Rafat
+# github: Rafat97
+# created at: 5-12-2021
+
+
+version: '3.1'
+
+networks:
+  localstack-network:
+
+volumes:
+  localstack-volume:
+
+services:
+  localstack:
+    container_name: "localstack_main"
+    image: localstack/localstack
+    networks:
+      - localstack-network
+    ports:
+      - "4566:4566"            # LocalStack Gateway
+      - "4510-4559:4510-4559"  # external services port range
+    # environment:
+      # - DEBUG=${DEBUG-}
+      # - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR-}
+    volumes:
+      - "localstack-volume:/var/lib/localstack"

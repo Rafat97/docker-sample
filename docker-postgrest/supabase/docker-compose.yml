@@ -1,0 +1,38 @@
+version: '3.8'
+
+
+volumes:
+  postgresql_data:
+
+
+services:
+  postgres:
+    image: supabase/postgres:15.1.0.117
+    ports:
+      - '5432:5432'
+    command:
+      - postgres
+      - -c
+      - config_file=/etc/postgresql/postgresql.conf
+      - -c
+      - log_min_messages=fatal # prevents Realtime polling queries from appearing in logs
+    healthcheck:
+      test: pg_isready -U postgres -h localhost
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - 'postgresql_data:/var/lib/postgresql'
+    environment:
+      POSTGRES_PASSWORD: postgres
+  
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - 5050:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'test@mail.com'
+      PGADMIN_DEFAULT_PASSWORD: '12345678'
+  

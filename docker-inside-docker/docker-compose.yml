@@ -8,4 +8,7 @@ services:
       dockerfile: Dockerfile
     privileged: true
     restart: always
-    # tty: true
+
+    # https://github.com/cruizba/ubuntu-dind/tree/master?tab=readme-ov-file
+    # https://youtu.be/JyEwKm-OfxA?si=0LPrVdtcc7FiCHZV
+    # runtime: sysbox-runc 

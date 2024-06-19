@@ -1,0 +1,3 @@
+{"timestamp": "2024-06-10T14:00:00Z", "message": "User logged in", "level": "info", "user": "john_doe"}
+{"timestamp": "2024-06-10T15:00:00Z", "message": "User logged out", "level": "info", "user": "jane_doe"}
+{"timestamp": "2024-06-10T15:00:00Z", "message": "User logged out", "level": "info", "user": "jane_doe", "event": "logged_out", "data": {"user info": "jane_doe"}}

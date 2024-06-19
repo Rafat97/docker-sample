@@ -1,0 +1,41 @@
+version: "3.7"
+
+volumes:
+  clickhouse-data:
+  grafana-data: 
+
+
+networks:
+  clickhouse:
+    driver: bridge
+
+
+services:
+  clickhouse-server:
+    image: clickhouse/clickhouse-server:24.4
+    container_name: clickhouse-server
+    networks:
+      - clickhouse
+    ports:
+      - "8123:8123"  # HTTP interface
+      - "9000:9000"  # Native interface
+    volumes:
+      - clickhouse-data:/var/lib/clickhouse
+      - ./clickhouse/config.xml:/etc/clickhouse-server/config.d/config.xml
+      - ./clickhouse/users.xml:/etc/clickhouse-server/users.d/users.xml
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:10.4.4
+    container_name: grafana
+    networks:
+      - clickhouse
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - clickhouse-server
+    restart: unless-stopped

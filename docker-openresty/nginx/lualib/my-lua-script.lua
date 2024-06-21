@@ -1,0 +1,1 @@
+ngx.say("Hello, OpenResty with Docker Compose!")

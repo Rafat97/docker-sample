@@ -35,6 +35,8 @@ if not ret then
 end
 local res2, err = red:get("inc_key")
 
+ngx.sleep(2)
+
 local worker_pid = ngx.worker.pid()
 local now = ngx.now
 local var = ngx.var
